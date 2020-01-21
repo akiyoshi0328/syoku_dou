@@ -4,7 +4,8 @@ class RestaurantsController < ApplicationController
   end
 
   def new
-    @restaurant = Restaurant.all
+    @restaurant = Restaurant.new
+    @prefectures = Prefecture.all
   end
 
   def create
@@ -13,10 +14,15 @@ class RestaurantsController < ApplicationController
     redirect_to @restaurant, notice: "店舗の登録をしました！"
   end
 
+  def show
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+
   private
 
   def restaurant_params
-    params.reqire(:restaurant).permit(:name, :prefecture, :municipalities, :building_name, :description, :phone_number, :business_hours, :regular_horiday, :homepage, :opening_date)
+    params.require(:restaurant).permit(:name, :prefecture_id, :municipalities, :building_name, :description, :phone_number, :business_hours, :regular_horiday, :homepage, :opening_date)
   end
 
 end
