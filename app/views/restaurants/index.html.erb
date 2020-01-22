@@ -1,0 +1,19 @@
+<div class="col-8 mx-auto"> 
+  <% @restaurants.each do |restaurant| %>
+      <h2 ><%= link_to restaurant.name, restaurant_path(restaurant) %>   <%= restaurant.prefecture.prefecture %> </h2>
+
+      <div class=" mb-5">
+        <% if restaurant.images.attached? %>
+          <% restaurant.images.each do |image| %>
+            <%= image_tag image.variant(resize: "200x200")%> 
+          <% end %>
+        <% else %>
+          <%= image_tag "no_image.png"  %>
+        <% end %>
+      </div>
+      <div class="card-text">
+      <p><%= truncate(restaurant.description, length: 20) %></p>
+      </div>
+      <hr>
+  <% end %>
+</div>
