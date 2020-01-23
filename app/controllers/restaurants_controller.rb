@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  
   def index
     @restaurants = Restaurant.all
   end
@@ -25,7 +26,6 @@ class RestaurantsController < ApplicationController
   end
 
   def update
-    
     if @restaurant.update(restaurant_params)
       redirect_to @restaurant, notice: "店舗を更新しました。"
     else
@@ -43,7 +43,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :prefecture_id, :municipalities, :building_name, :description, :phone_number, :business_hours, :regular_horiday, :homepage, :opening_date, images: [] )
+    params.require(:restaurant).permit(:name, :prefecture_id, :municipalities, :building_name, :description, :phone_number, :business_hours, :regular_horiday, :homepage, :opening_date,:category_id, images: [] )
   end
 
   def set_restaurant

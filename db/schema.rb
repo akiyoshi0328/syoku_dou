@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_131341) do
+ActiveRecord::Schema.define(version: 2020_01_23_135150) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 2020_01_23_131341) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "prefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "prefecture"
     t.datetime "created_at", null: false
@@ -44,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_131341) do
     t.string "municipalities", null: false
     t.string "building_name"
     t.text "description"
+    t.bigint "category_id"
     t.string "phone_number"
     t.text "business_hours"
     t.string "regular_horiday"
@@ -52,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_131341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "prefecture_id"
+    t.index ["category_id"], name: "index_restaurants_on_category_id"
     t.index ["prefecture_id"], name: "index_restaurants_on_prefecture_id"
   end
 
@@ -69,5 +77,6 @@ ActiveRecord::Schema.define(version: 2020_01_23_131341) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "restaurants", "categories"
   add_foreign_key "restaurants", "prefectures"
 end

@@ -6,6 +6,7 @@
       <ul>
         <li><b>都道府県名: </b><%= @restaurant.prefecture.prefecture %></li>
         <li><b>住所: </b><%= @restaurant.municipalities %> <%= @restaurant.building_name %></li>
+        <li><b>カテゴリー: </b><%= @restaurant.category&.name %></li>
       </ul>
     </div>
   </div>
