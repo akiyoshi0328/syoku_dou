@@ -3,7 +3,7 @@
       <h2 ><%= link_to restaurant.name, restaurant_path(restaurant) %>   <%= restaurant.prefecture.prefecture %> </h2>
 
       <div class=" mb-5">
-        <%= show_restaurant_image restaurant %>
+        <%= show_restaurant_images restaurant %>
       </div>
       <div class="card-text">
       <p><%= truncate(restaurant.description, length: 20) %></p>

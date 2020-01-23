@@ -26,7 +26,7 @@ class RestaurantsController < ApplicationController
 
   def update
     
-    if @restaurant.update(restaraunt_params)
+    if @restaurant.update(restaurant_params)
       redirect_to @restaurant, notice: "店舗を更新しました。"
     else
       render :edit

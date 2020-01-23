@@ -1,5 +1,5 @@
 module RestaurantsHelper
-  def show_restaurant_image(restaurant)
+  def show_restaurant_images(restaurant)
     if restaurant.images.attached? 
       restaurant.images.each do |image| 
         image_tag image.variant(resize: "200x200")
