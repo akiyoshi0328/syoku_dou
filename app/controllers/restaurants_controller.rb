@@ -20,6 +20,7 @@ class RestaurantsController < ApplicationController
   
   def edit
     @restaurant = Restaurant.find(params[:id])
+    @prefectures = Prefecture.all
   end
 
   def update
@@ -29,6 +30,12 @@ class RestaurantsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.destroy
+    redirect_to restaurants_path, notice: "投稿を削除しました。"
   end
 
 
