@@ -8,5 +8,12 @@ module RestaurantsHelper
       image_tag "no_image.png"
     end
   end
+  def show_restaurant_small_image(restaurant)
+    # if restaurant&.images&.attached?
+    #   image_tag restaurant.image.variant(resize: "50x50"), class: "img-thumbnail"
+    # else
+    #   image_tag "no_image.png", class: "img-thumbnail", width: 50
+    # end
+  end
 
 end

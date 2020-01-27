@@ -14,10 +14,17 @@
   <h4>お店の説明</h4>
   <div><%= @restaurant.description %> </div>
 
+  <hr>
+  <%= render partial: "reviews/review", collection: @restaurant.reviews %>
+
+
   <%= link_to "編集", edit_restaurant_path(@restaurant), class: "btn btn-primary" %>
   <p>
     <%= button_tag "削除", class: "btn btn-primary btn-warning", data: { toggle: "modal", target: "#delete-post" } %>
   </p>
+  <% if user_signed_in? %>
+    <%= link_to t(".review_new"), new_restaurant_review_path(@restaurant), class: "btn btn-info" %>
+  <% end %>
   <%= link_to "戻る", restaurants_path, class: "btn btn-secondary" %>
 </div>
 

@@ -41,6 +41,9 @@ gem 'mini_magick'
 gem 'devise'
 gem 'rails-i18n'
 gem 'devise-i18n'
+gem 'kaminari'
+gem 'carrierwave'
+gem 'streamio-ffmpeg'
 
 
 
