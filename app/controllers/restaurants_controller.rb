@@ -2,7 +2,6 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
   
   def index
-    @restaurants = Restaurant.all
   end
 
   def new
@@ -21,11 +20,11 @@ class RestaurantsController < ApplicationController
   end
   
   def edit
-    
     @prefectures = Prefecture.all
   end
 
   def update
+    @prefectures = Prefecture.all
     if @restaurant.update(restaurant_params)
       redirect_to @restaurant, notice: "店舗を更新しました。"
     else

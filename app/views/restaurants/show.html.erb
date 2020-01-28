@@ -1,27 +1,66 @@
 <div class="col-md-10 offset-md-1 mt-5">
   <div class="row">
-    <%= show_restaurant_images @restaurant %>
-    <div class="col-md-8">
-      <h2><%= @restaurant.name %></h2>
-      <ul>
-        <li><b>都道府県名: </b><%= @restaurant.prefecture.prefecture %></li>
-        <li><b>住所: </b><%= @restaurant.municipalities %> <%= @restaurant.building_name %></li>
-        <li><b>カテゴリー: </b><%= @restaurant.category&.name %></li>
-      </ul>
+    <div class="col-md-7 mb-5">
+      <% if @restaurant.images.attached?  %> 
+        <div>
+          <% @restaurant.images.each do |image|  %>
+            <%= image_tag image.variant(resize: "200x200")  %>
+          <% end %>
+        </div> 
+      <% else %>    
+        <%= image_tag "no_image.png"  %> 
+      <% end %> 
     </div>
-  </div>
-  <hr>
-  <h4>お店の説明</h4>
-  <div><%= @restaurant.description %> </div>
 
+    <hr>
+    <div class="col-md-8">
+      <table class="table table-bordered  table-hover">
+        <tbody>
+          <tr>
+            <th   class="info" >店舗名:</th>
+            <td><h2><%= @restaurant.name %> </h2></td>
+          </tr>
+          <tr>
+            <th >カテゴリー:</th>
+            <td><%= @restaurant.category&.name %></td>
+          </tr>
+          <tr>
+            <th >お問い合わせ:</th>
+            <td><%= @restaurant.phone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row">住所:</th>
+            <td><%= @restaurant.prefecture.prefecture %><%= @restaurant.municipalities %> <%= @restaurant.building_name %></td>
+          </tr>
+          <tr>
+            <th scope="row">ホームページ: </th>
+            <td><%= link_to @restaurant.homepage,@restaurant.homepage%></td>
+          </tr>
+          <tr>
+            <th scope="row">定休日:</th>
+            <td><%= @restaurant.regular_horiday %></td>
+          </tr>
+          <tr>
+            <th scope="row">営業時間:</th>
+            <td><%= @restaurant.business_hours %></td>
+          </tr>
+          <tr>
+            <th scope="row">創業日:</th>
+            <td> <%= @restaurant.opening_date  %> </td>
+          </tr>
+          <tr>
+            <th scope="row">お店の紹介:</th>
+            <td> <%= @restaurant.description %> </td>
+          </tr>
+        </tbody>
+      </table>
+      
   <hr>
   <%= render partial: "reviews/review", collection: @restaurant.reviews %>
 
 
   <%= link_to "編集", edit_restaurant_path(@restaurant), class: "btn btn-primary" %>
-  <p>
-    <%= button_tag "削除", class: "btn btn-primary btn-warning", data: { toggle: "modal", target: "#delete-post" } %>
-  </p>
+  <%= button_tag "削除", class: "btn btn-primary btn-warning", data: { toggle: "modal", target: "#delete-post" } %>
   <% if user_signed_in? %>
     <%= link_to t(".review_new"), new_restaurant_review_path(@restaurant), class: "btn btn-info" %>
   <% end %>

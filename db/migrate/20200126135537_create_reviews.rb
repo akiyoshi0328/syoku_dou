@@ -8,6 +8,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
 
       t.timestamps
-    end
+    end  
+  add_index :reviews, [ :restaurant_id, :user_id], unique: true
   end
 end

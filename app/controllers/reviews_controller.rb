@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :new, :create, :edit]
+  before_action :set_restaurant, only: [:show, :new, :create, :edit, :update]
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.attributes = {restaurant_id: params[:restaurant_id],user_id: current_user.id}
+    p @review
     if @review.save
       redirect_to @review.restaurant, notice: "レビューを登録しました。"
     else
@@ -23,23 +24,22 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    if @review.update(review_params)
-      redirect_to @review.restaurant, notice: "レビューを更新しました。"
-    else
-      render :edit
-    end
-
+  #   if @review.update(review_params)
+  #     redirect_to @review.restaurant, notice: "レビューを更新しました。"
+  #   else
+  #     render :edit
+  #   end
     respond_to do |format|
       if @review.update(review_params) && @review.video.recreate_versions!
-      format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+      format.html { redirect_to @review.restaurant, notice: 'レビューを更新しました。' }
       format.json { head :no_content }
       else
       format.html { render action: 'edit' }
       format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
-    
   end
+
 
   def destroy
     @review.destroy
