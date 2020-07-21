@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      review: レビュー
+    attributes:
+      user:
+        email: メールアドレス
+        nick_name: ニックネーム
+        avatar: プロフィール画像
+        password: パスワード
+        current_password: 現在のパスワード
+        remember_me: ログイン情報を記録する
+      review:
+        title: 題名
+        body: 本文
+        evaluation: 評価
+        restaurant_id: 店舗
+        restaurant: 店舗
+        user_id: ユーザー
+        user: ユーザー

@@ -1,0 +1,26 @@
+<div class="col-8 mx-auto"> 
+  <% @restaurants.each do |restaurant| %>
+      <h2 ><%= link_to restaurant.name, restaurant_path(restaurant) %>  </h2>
+      <b><%= restaurant.prefecture.prefecture %>><%= restaurant.category&.name %> </b> 
+
+      <div class=" mb-5">
+        <% if restaurant.images.attached?  %> 
+          <div>
+            <% restaurant.images.each do |image|  %>
+              <%= image_tag image.variant(resize: "200x200")  %>
+            <% end %>
+          </div> 
+        <% else %>    
+          <%= image_tag "no_image.png"  %> 
+        <% end %> 
+      </div>
+      <div class="card-text">
+      <p><%= truncate(restaurant.description, length: 20) %></p>
+      </div>
+      <hr>
+  <% end %>
+</div>
+
+<div class="col-12">
+  <%= paginate @restaurants %>
+</div>
